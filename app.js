@@ -110,25 +110,30 @@ function setupSignup() {
   if (!form) return;
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const name = $('name')?.value.trim();
-    const email = $('email')?.value.trim();
+    const name = $('name')?.value.trim() || '';
+    const email = $('email')?.value.trim() || '';
     const p1 = $('pass')?.value || '';
     const p2 = $('pass2')?.value || '';
+    const error = $('signupError');
+    const fail = msg => {
+      if (error) { error.textContent = msg; error.style.display = 'block'; }
+      showToast(msg);
+    };
+    if (error) error.style.display = 'none';
+    if (!name || !email || !p1 || !p2) { fail('กรุณากรอกข้อมูลให้ครบทุกช่อง'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('กรุณากรอกอีเมลให้ถูกต้อง'); return; }
+    if (p1.length < 6) { fail('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'); return; }
+    if (p1 !== p2) { fail('รหัสผ่านไม่ตรงกัน กรุณาลองใหม่'); return; }
 
-    if (!name || !email || !p1 || !p2) return;
-    if (p1 !== p2) {
-      showToast('รหัสผ่านไม่ตรงกัน กรุณาลองใหม่');
-      return;
+    try {
+      localStorage.setItem(STORAGE.loggedIn, 'true');
+      localStorage.setItem(STORAGE.email, email);
+      localStorage.setItem(STORAGE.name, name);
+      window.location.assign('main.html');
+    } catch (err) {
+      fail('ไม่สามารถบันทึกบัญชีในเบราว์เซอร์ได้ กรุณาเปิดเว็บผ่าน Chrome/Edge แล้วลองใหม่');
+      console.error(err);
     }
-    if (p1.length < 6) {
-      showToast('รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร');
-      return;
-    }
-
-    localStorage.setItem(STORAGE.loggedIn, 'true');
-    localStorage.setItem(STORAGE.email, email);
-    localStorage.setItem(STORAGE.name, name);
-    window.location.href = 'main.html';
   });
 }
 

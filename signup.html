@@ -9,42 +9,24 @@
 <body>
 <div class="auth-page">
   <div class="stage">
-    <div class="tabs">
-      <div class="tab active">เข้าสู่ระบบ</div>
-    </div>
+    <div class="tabs"><div class="tab active">สมัครสมาชิก</div></div>
     <div class="card">
-      <div class="back-row">
-        <a class="icon-btn" href="index.html">←</a>
-      </div>
+      <div class="back-row"><a class="icon-btn" href="index.html">←</a></div>
       <span class="eyebrow">เข้าร่วมกับเรา</span>
       <h1 class="headline">สมัครสมาชิก</h1>
       <p class="sub">สร้างบัญชีเพื่อเริ่มจองคาบติวแรกของคุณ</p>
-
-      <form id="signupForm">
-        <div class="field">
-          <label for="name">ชื่อ-นามสกุล</label>
-          <input id="name" type="text" placeholder="ชื่อของคุณ" required>
-        </div>
-        <div class="field">
-          <label for="email">อีเมล</label>
-          <input id="email" type="email" placeholder="you@email.com" required>
-        </div>
-        <div class="field">
-          <label for="pass">รหัสผ่าน</label>
-          <input id="pass" type="password" placeholder="••••••••" required>
-        </div>
-        <div class="field">
-          <label for="pass2">ยืนยันรหัสผ่าน</label>
-          <input id="pass2" type="password" placeholder="••••••••" required>
-        </div>
+      <form id="signupForm" novalidate>
+        <div class="field"><label for="name">ชื่อ-นามสกุล</label><input id="name" type="text" placeholder="ชื่อของคุณ" required></div>
+        <div class="field"><label for="email">อีเมล</label><input id="email" type="email" placeholder="you@email.com" required></div>
+        <div class="field"><label for="pass">รหัสผ่าน</label><input id="pass" type="password" placeholder="อย่างน้อย 6 ตัวอักษร" minlength="6" required></div>
+        <div class="field"><label for="pass2">ยืนยันรหัสผ่าน</label><input id="pass2" type="password" placeholder="กรอกรหัสผ่านอีกครั้ง" required></div>
+        <p id="signupError" style="display:none;margin:10px 0;padding:10px;border-radius:8px;background:#ffe9e9;color:#b42318;font-size:14px"></p>
         <button class="btn btn-primary btn-block" type="submit">สมัครสมาชิก</button>
       </form>
-
       <p class="foot-note">มีบัญชีอยู่แล้ว? <a class="link" href="index.html">เข้าสู่ระบบ</a></p>
     </div>
   </div>
 </div>
-
 <script src="app.js"></script>
 </body>
 </html>
