@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตั้งค่า — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell">
+    <div class="app-topbar">
+      <a class="icon-btn" href="main.html">←</a>
+      <div class="profile-chip" onclick="toggleDropdown()">
+        <div class="avatar">G</div>
+        <span class="caret">▾</span>
+      </div>
+    </div>
+
+    <div class="app-body">
+      <div class="section-label">ตั้งค่า</div>
+      <div class="panel-list">
+        <div class="panel-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <div>
+              <h3>การแจ้งเตือน</h3>
+              <p>รับอีเมลแจ้งเตือนก่อนคาบติว 30 นาที</p>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;white-space:nowrap;">
+              <input id="notificationToggle" type="checkbox" style="accent-color:#2F7C5D;transform:scale(1.2);"> เปิด
+            </label>
+          </div>
+        </div>
+        <div class="panel-card">
+          <h3>ภาษา</h3>
+          <p>ไทย (ค่าเริ่มต้น)</p>
+        </div>
+        <div class="panel-card">
+          <h3>บัญชี</h3>
+          <p><span class="link" onclick="logout()">ออกจากระบบ</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <a class="dropdown-item" href="profile.html" style="display:block;color:inherit;">โปรไฟล์ของฉัน</a>
+      <a class="dropdown-item" href="settings.html" style="display:block;color:inherit;">ตั้งค่า</a>
+      <div class="dropdown-item danger" onclick="logout()">ออกจากระบบ</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

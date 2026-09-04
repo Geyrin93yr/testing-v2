@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>หน้าหลัก — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell">
+    <div class="app-topbar">
+      <div class="hamburger" onclick="toggleDrawer(true)"><span></span><span></span><span></span></div>
+      <div class="profile-chip" onclick="toggleDropdown()">
+        <div class="avatar">G</div>
+        <span class="caret">▾</span>
+      </div>
+    </div>
+    <div class="app-body">
+      <div class="section-label">คาบติวของคุณ</div>
+<div class="course-list">
+  <div class="course-card">
+    <div class="badge-float">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" onclick="showToast('เริ่มวิดีโอคอล')"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-4v12l-6-4"/></svg>
+      <!--ใช้จริงค่อยเอาคอมเม้นตัวข้างล่างออก-->
+      <!--<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" onclick="window.open('https://meet.google.com/new', '_blank')"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-4v12l-6-4"/></svg>-->
+    </div>
+      <div class="course-card-top">
+      <span class="course-card-title">แคลคูลัส 1</span>
+      <span class="course-card-icon" onclick="showToast('ออกจากคลาสเรียน')">
+        <svg viewBox="0 0 440 384" fill="currentColor">
+  <path d="M112 18 L112 366 L228 334 L228 52 Z"/>
+  <rect x="228" y="28" width="99" height="36" rx="10"/>
+  <rect x="290" y="28" width="36" height="102" rx="10"/>
+  <rect x="228" y="330" width="99" height="36" rx="10"/>
+  <rect x="290" y="264" width="36" height="102" rx="10"/>
+  <rect x="228" y="179" width="138" height="36" rx="10"/>
+  <path d="M330 138 L412 192 L330 246 Z"/>
+</svg>
+      </span>
+    </div>
+    <div class="course-card-tutor">ติวเตอร์: พี่แนน</div>
+  </div>
+<div class="modal-overlay" id="joinModal">
+  <div class="join-modal">
+    <h2>เข้าร่วมชั้นเรียน</h2>
+
+    <div class="join-modal-section">
+      <h3>รหัสชั้นเรียน</h3>
+      <p class="hint">ขอรหัสชั้นเรียนจากติวเตอร์ แล้วป้อนรหัสที่นี่</p>
+      <input type="text" id="classCodeInput" placeholder="รหัสชั้นเรียน" oninput="checkClassCode()">
+    </div>
+
+    <div class="join-modal-actions">
+      <span class="link" onclick="closeJoinModal()">ยกเลิก</span>
+      <button class="link-btn" id="joinConfirmBtn" disabled onclick="confirmJoin()">เข้าร่วม</button>
+    </div>
+  </div>
+</div>
+</div>
+    
+    </div>
+    <button class="join-fab" onclick="openJoinModal()">เข้าร่วมคาบเรียน</button>
+    <div class="overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+    <div class="drawer" id="drawer">
+      <div class="icon-btn drawer-close" onclick="toggleDrawer(false)">✕</div>
+      <a class="drawer-item" href="contact.html">✉️ ติดต่อเรา</a>
+      <a class="drawer-item" href="report.html">🚩 รายงานปัญหา</a>
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <a class="dropdown-item" href="profile.html" style="display:block;color:inherit;">โปรไฟล์ของฉัน</a>
+      <a class="dropdown-item" href="settings.html" style="display:block;color:inherit;">ตั้งค่า</a>
+      <div class="dropdown-item danger" onclick="logout()">ออกจากระบบ</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายงานปัญหา — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell">
+    <div class="app-topbar">
+      <a class="icon-btn" href="main.html">←</a>
+      <div class="profile-chip" onclick="toggleDropdown()">
+        <div class="avatar">G</div>
+        <span class="caret">▾</span>
+      </div>
+    </div>
+
+    <div class="app-body">
+      <div class="section-label">รายงานปัญหา</div>
+      <div class="panel-list">
+        <div class="panel-card">
+          <form id="reportForm" style="display:flex; flex-direction:column; gap:12px;">
+            <div class="field">
+              <label>ประเภทปัญหา</label>
+              <input type="text" placeholder="เช่น ปัญหาการเข้าห้องเรียน" required>
+            </div>
+            <div class="field">
+              <label>รายละเอียด</label>
+              <textarea placeholder="อธิบายสิ่งที่เกิดขึ้น..." required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">ส่งรายงาน</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <a class="dropdown-item" href="profile.html" style="display:block;color:inherit;">โปรไฟล์ของฉัน</a>
+      <a class="dropdown-item" href="settings.html" style="display:block;color:inherit;">ตั้งค่า</a>
+      <div class="dropdown-item danger" onclick="logout()">ออกจากระบบ</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

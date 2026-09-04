@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เข้าสู่ระบบ — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-page">
+  <div class="stage">
+    <div class="tabs">
+      <div class="tab active">เข้าสู่ระบบ</div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">รังติว · หน้าแรก</span>
+      <h1 class="headline">ยินดีต้อนรับกลับ</h1>
+      <p class="sub">เข้าสู่ระบบเพื่อดูตารางติวและติวเตอร์ของคุณ</p>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="loginEmail">อีเมล</label>
+          <input id="loginEmail" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="loginPass">รหัสผ่าน</label>
+          <input id="loginPass" type="password" placeholder="••••••••" required>
+        </div>
+        <div class="row-between">
+          <label><input type="checkbox" style="accent-color:#2F7C5D"> จดจำฉันไว้</label>
+          <a class="link" href="forgot.html">ลืมรหัสผ่าน?</a>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">เข้าสู่ระบบ</button>
+      </form>
+
+      <p class="foot-note">ยังไม่มีบัญชี? <a class="link" href="signup.html">สมัครที่นี่</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ติดต่อเรา — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell">
+    <div class="app-topbar">
+      <a class="icon-btn" href="main.html">←</a>
+      <div class="profile-chip" onclick="toggleDropdown()">
+        <div class="avatar">G</div>
+        <span class="caret">▾</span>
+      </div>
+    </div>
+
+    <div class="app-body">
+      <div class="section-label">ติดต่อเรา</div>
+      <div class="panel-list">
+        <div class="panel-card">
+          <h3>ฝ่ายช่วยเหลือ</h3>
+          <p>อีเมล support@rungtiew.app<br>ตอบกลับภายใน 24 ชั่วโมงในวันทำการ</p>
+        </div>
+        <div class="panel-card">
+          <h3>ส่งข้อความถึงเรา</h3>
+          <form id="contactForm" style="margin-top:10px; display:flex; flex-direction:column; gap:12px;">
+            <div class="field">
+              <label>หัวข้อ</label>
+              <input type="text" placeholder="เรื่องที่ต้องการติดต่อ" required>
+            </div>
+            <div class="field">
+              <label>ข้อความ</label>
+              <textarea placeholder="พิมพ์รายละเอียด..." required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">ส่งข้อความ</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <a class="dropdown-item" href="profile.html" style="display:block;color:inherit;">โปรไฟล์ของฉัน</a>
+      <a class="dropdown-item" href="settings.html" style="display:block;color:inherit;">ตั้งค่า</a>
+      <div class="dropdown-item danger" onclick="logout()">ออกจากระบบ</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

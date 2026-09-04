@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ลืมรหัสผ่าน — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-page">
+  <div class="stage">
+    <div class="tabs">
+      <div class="tab active">เข้าสู่ระบบ</div>
+    </div>
+    <div class="card">
+      <div class="back-row">
+        <a class="icon-btn" href="index.html">←</a>
+      </div>
+      <span class="eyebrow">รีเซ็ตรหัสผ่าน</span>
+      <h1 class="headline">ลืมรหัสผ่าน?</h1>
+      <p class="sub">กรอกอีเมลของคุณ เราจะส่งรหัสยืนยันไปให้</p>
+
+      <form id="forgotForm">
+        <div class="field">
+          <label for="femail">อีเมล</label>
+          <input id="femail" type="email" placeholder="you@email.com" required>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">ส่งรหัสยืนยัน</button>
+      </form>
+
+      <p class="helper-link">พบปัญหา? <a class="link" href="contact.html">ติดต่อเรา</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
