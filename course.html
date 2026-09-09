@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">คลาสเรียน — who tutor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+<div class="app-page">
+  <div class="app-shell">
+    <div class="course-layout">
+
+      <!-- Score / navigation sidebar -->
+      <aside class="leaderboard collapsed" id="leaderboard">
+        <div class="leaderboard-inner">
+          <div class="score-block">
+            <div class="score-block-label">คะแนนของคุณ</div>
+            <div class="score-bar">
+              <div class="score-bar-fill" id="myScoreFill" style="width:10%"></div>
+              <span class="score-bar-text" id="myScoreText">10%</span>
+            </div>
+          </div>
+
+          <div class="rank-list" id="rankList"></div>
+        </div>
+        <div class="leaderboard-home">
+          <a class="home-btn" href="main.html" title="กลับหน้า Home">⌂ <span>กลับ Home</span></a>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="course-main">
+        <div class="course-topbar">
+          <div class="course-nav-buttons">
+            <a class="icon-btn back-btn" href="main.html" title="กลับ Home" aria-label="กลับ Home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            </a>
+            <button class="icon-btn hamburger-btn" type="button" onclick="toggleLeaderboard()" title="เปิดเมนูคะแนน" aria-label="เปิดเมนูคะแนน">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+          <div class="class-name-chip" id="className">แคลคูลัส 1</div>
+          <div class="course-actions">
+            <div class="icon-btn" onclick="showToast('เปิดแชทคลาสเรียน')" title="แชท">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="icon-btn" onclick="window.open('https://meet.google.com/new', '_blank')" title="เริ่มวิดีโอคอล">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-4v12l-6-4"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-body">
+          <div class="section-label">งานที่ได้รับมอบหมาย</div>
+          <div class="assignment-list" id="assignmentList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+<script>
+  const COURSES = {
+    calc1: {
+      name: 'แคลคูลัส 1',
+      tutor: 'พี่แนน',
+      myScore: 10,
+      leaderboard: [
+        { place: '1st', pct: 88, color: '#26417A' },
+        { place: '2nd', pct: 78, color: '#3E7CB1' },
+        { place: '3rd', pct: 66, color: '#3FA34D' },
+        { place: '4th', pct: 56, color: '#86C15A' },
+        { place: '5th', pct: 46, color: '#C7C24A' },
+        { place: '6th', pct: 30, color: '#E08E3E' },
+        { place: '7th', pct: 10, color: '#D9534F' },
+        { place: '8th', pct: 6,  color: '#B84A45' }
+      ],
+      assignments: [
+        { name: 'การบ้าน 3', status: 'red',    note: 'ยังไม่ได้ส่ง' },
+        { name: 'การบ้าน 2', status: 'yellow', note: 'รอตรวจ' },
+        { name: 'การบ้าน 1', status: 'green',  note: 'ตรวจแล้ว' }
+      ]
+    }
+  };
+
+  function renderCourse() {
+    const params = new URLSearchParams(location.search);
+    const id = params.get('c') || localStorage.getItem('rungtiewCourseId') || 'calc1';
+    const course = COURSES[id] || COURSES.calc1;
+    localStorage.setItem('rungtiewCourseId', id);
+
+    document.getElementById('pageTitle').textContent = course.name + ' — who tutor';
+    document.getElementById('className').textContent = course.name;
+
+    document.getElementById('myScoreFill').style.width = course.myScore + '%';
+    document.getElementById('myScoreText').textContent = course.myScore + '%';
+
+    const rankList = document.getElementById('rankList');
+    rankList.innerHTML = course.leaderboard.map(r => `
+      <div class="rank-row">
+        <span class="rank-place">${r.place}</span>
+        <div class="rank-bar"><div class="rank-bar-fill" style="width:${r.pct}%;background:${r.color};"></div></div>
+      </div>
+    `).join('');
+
+    const list = document.getElementById('assignmentList');
+    list.innerHTML = course.assignments.map(a => `
+      <div class="assignment-card" onclick="showToast('ดูงานที่ได้รับมอบหมาย')">
+        <span class="status-dot ${a.status}"></span>
+        <span class="assignment-title">${a.name}</span>
+        <span class="assignment-note">${a.note}</span>
+      </div>
+    `).join('');
+  }
+
+  function toggleLeaderboard() {
+    const board = document.getElementById('leaderboard');
+    if (!board) return;
+    board.classList.toggle('collapsed');
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCourse);
+  document.addEventListener('click', function (e) {
+  const board = document.getElementById('leaderboard');
+  const hamburger = document.querySelector('.hamburger-btn');
+
+  if (!board || !hamburger) return;
+
+  
+  if (!board.classList.contains('collapsed')) {
+
+    
+    if (board.contains(e.target)) return;
+
+    
+    if (hamburger.contains(e.target)) return;
+
+    // คลิกพื้นที่อื่น → ปิด
+    board.classList.add('collapsed');
+  }
+});
+</script>
+</body>
+</html>

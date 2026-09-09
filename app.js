@@ -169,6 +169,11 @@ function setupReport() {
   });
 }
 
+function goToCourse(id) {
+  localStorage.setItem('rungtiewCourseId', id);
+  window.location.href = 'course.html?c=' + encodeURIComponent(id);
+}
+
 function openJoinModal() {
   const modal = $('joinModal');
   if (!modal) return;

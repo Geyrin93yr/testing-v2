@@ -20,7 +20,7 @@
     <div class="app-body">
       <div class="section-label">คาบติวของคุณ</div>
 <div class="course-list">
-  <div class="course-card">
+  <div class="course-card" onclick="goToCourse('calc1')">
     <div class="badge-float">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M9 4h6a1 1 0 0 1 1 1v2H8V5a1 1 0 0 1 1-1Z"/><rect x="5" y="4" width="14" height="18" rx="2"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="13" y2="19"/></svg>
@@ -30,7 +30,7 @@
     </div>
       <div class="course-card-top">
       <span class="course-card-title">แคลคูลัส 1</span>
-      <span class="course-card-icon" onclick="showToast('ออกจากคลาสเรียน')">
+      <span class="course-card-icon" onclick="event.stopPropagation(); showToast('ออกจากคลาสเรียน')">
         <svg viewBox="0 0 440 384" fill="currentColor">
   <path d="M112 18 L112 366 L228 334 L228 52 Z"/>
   <rect x="228" y="28" width="99" height="36" rx="10"/>
