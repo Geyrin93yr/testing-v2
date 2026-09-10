@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แชท — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell chat-shell">
+
+    <!-- SCREEN 1: chat list -->
+    <div class="chat-screen active" id="chatListScreen">
+      <div class="chat-header">
+        <a class="icon-btn" href="main.html">←</a>
+        <span class="chat-header-name">แชท</span>
+      </div>
+      <div class="chat-list">
+        <div class="chat-row" onclick="openChatRoom('พี่แนน')">
+          <div class="avatar">น</div>
+          <div>
+            <div class="chat-row-name">พี่แนน</div>
+            <div class="chat-row-preview">ติวเตอร์ · แคลคูลัส 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: conversation -->
+    <div class="chat-screen" id="chatRoomScreen">
+      <div class="chat-header">
+        <div class="icon-btn" onclick="closeChatRoom()">←</div>
+        <div class="avatar" id="roomAvatar">น</div>
+        <span class="chat-header-name" id="roomName">พี่แนน</span>
+      </div>
+
+      <div class="chat-thread" id="chatThread">
+        <div class="msg-bubble msg-in">สวัสดีค่ะ</div>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+        <div class="chat-icon-btn chat-attach" title="แนบไฟล์" onclick="showToast('แนบไฟล์')">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="chat-icon-btn chat-send" title="ส่ง" onclick="sendChatMessage()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

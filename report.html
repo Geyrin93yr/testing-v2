@@ -16,16 +16,30 @@
         <span class="caret">▾</span>
       </div>
     </div>
-
+    
     <div class="app-body">
       <div class="section-label">รายงานปัญหา</div>
       <div class="panel-list">
         <div class="panel-card">
           <form id="reportForm" style="display:flex; flex-direction:column; gap:12px;">
-            <div class="field">
-              <label>ประเภทปัญหา</label>
-              <input type="text" placeholder="เช่น ปัญหาการเข้าห้องเรียน" required>
-            </div>
+            <div class="form-group">
+    <label for="reportType">ประเภทรายงานปัญหา</label>
+    <select id="reportType" name="reportType" required>
+        <option value="" disabled selected>เลือกประเภทปัญหา</option>
+        <option value="join-class">
+            ไม่สามารถเข้าร่วมชั้นเรียนได้
+        </option>
+        <option value="email-blocked">
+            อีเมลถูกบล็อค
+        </option>
+        <option value="grader-not-working">
+            Grader ไม่ทำงาน
+        </option>
+        <option value="other">
+            อื่นๆ
+        </option>
+    </select>
+</div>
             <div class="field">
               <label>รายละเอียด</label>
               <textarea placeholder="อธิบายสิ่งที่เกิดขึ้น..." required></textarea>

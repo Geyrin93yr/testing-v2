@@ -22,6 +22,7 @@
             </div>
           </div>
 
+          <div class="score-block-title">Leaderboard · 20 อันดับ</div>
           <div class="rank-list" id="rankList"></div>
         </div>
         <div class="leaderboard-home">
@@ -42,10 +43,10 @@
           </div>
           <div class="class-name-chip" id="className">แคลคูลัส 1</div>
           <div class="course-actions">
-            <div class="icon-btn" onclick="showToast('เปิดแชทคลาสเรียน')" title="แชท">
+            <a class="icon-btn" href="chat.html" title="แชท" aria-label="แชท">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            <div class="icon-btn" onclick="window.open('https://meet.google.com/new', '_blank')" title="เริ่มวิดีโอคอล">
+            </a>
+            <div class="icon-btn" onclick="window.open('https://meet.google.com/new', '_blank', 'noopener,noreferrer')" title="เริ่มวิดีโอคอล">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-4v12l-6-4"/></svg>
             </div>
           </div>
@@ -70,14 +71,26 @@
       tutor: 'พี่แนน',
       myScore: 10,
       leaderboard: [
-        { place: '1st', pct: 88, color: '#26417A' },
-        { place: '2nd', pct: 78, color: '#3E7CB1' },
-        { place: '3rd', pct: 66, color: '#3FA34D' },
-        { place: '4th', pct: 56, color: '#86C15A' },
-        { place: '5th', pct: 46, color: '#C7C24A' },
-        { place: '6th', pct: 30, color: '#E08E3E' },
-        { place: '7th', pct: 10, color: '#D9534F' },
-        { place: '8th', pct: 6,  color: '#B84A45' }
+        { place: 1, name: 'น้องฟ้า', pct: 98 },
+        { place: 2, name: 'น้องนนท์', pct: 95 },
+        { place: 3, name: 'น้องมิ้นท์', pct: 92 },
+        { place: 4, name: 'น้องพีท', pct: 89 },
+        { place: 5, name: 'น้องเจน', pct: 86 },
+        { place: 6, name: 'น้องบอส', pct: 83 },
+        { place: 7, name: 'น้องแพรว', pct: 80 },
+        { place: 8, name: 'น้องกาย', pct: 77 },
+        { place: 9, name: 'น้องน้ำ', pct: 74 },
+        { place: 10, name: 'น้องไอซ์', pct: 71 },
+        { place: 11, name: 'น้องมุก', pct: 68 },
+        { place: 12, name: 'น้องต้น', pct: 65 },
+        { place: 13, name: 'น้องฟิล์ม', pct: 62 },
+        { place: 14, name: 'น้องพลอย', pct: 59 },
+        { place: 15, name: 'น้องอาร์ม', pct: 56 },
+        { place: 16, name: 'น้องบีม', pct: 53 },
+        { place: 17, name: 'น้องเนย', pct: 50 },
+        { place: 18, name: 'น้องโอ๊ต', pct: 47 },
+        { place: 19, name: 'น้องกอล์ฟ', pct: 44 },
+        { place: 20, name: 'น้องข้าว', pct: 41 }
       ],
       assignments: [
         { name: 'การบ้าน 3', status: 'red',    note: 'ยังไม่ได้ส่ง' },
@@ -91,7 +104,7 @@
     const params = new URLSearchParams(location.search);
     const id = params.get('c') || localStorage.getItem('rungtiewCourseId') || 'calc1';
     const course = COURSES[id] || COURSES.calc1;
-    localStorage.setItem('rungtiewCourseId', id);
+    localStorage.setItem('rungtiewCourseId', COURSES[id] ? id : 'calc1');
 
     document.getElementById('pageTitle').textContent = course.name + ' — who tutor';
     document.getElementById('className').textContent = course.name;
@@ -102,8 +115,12 @@
     const rankList = document.getElementById('rankList');
     rankList.innerHTML = course.leaderboard.map(r => `
       <div class="rank-row">
-        <span class="rank-place">${r.place}</span>
-        <div class="rank-bar"><div class="rank-bar-fill" style="width:${r.pct}%;background:${r.color};"></div></div>
+        <div class="rank-info">
+          <span class="rank-place">${r.place}</span>
+          <span class="rank-name">${r.name}</span>
+          <span class="rank-score">${r.pct}%</span>
+        </div>
+        <div class="rank-bar"><div class="rank-bar-fill" style="width:${r.pct}%;"></div></div>
       </div>
     `).join('');
 

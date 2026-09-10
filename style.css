@@ -310,14 +310,14 @@ textarea:focus{ border-color:var(--green); background:var(--paper); box-shadow:0
 .course-layout{ display:flex; min-height:100%; align-items:stretch; }
 
 .leaderboard{
-  position:relative; flex:none; width:190px; background:var(--ink); color:#fff;
-  padding:22px 16px; overflow:hidden; transition:width .3s ease, padding .3s ease;
+  position:relative; flex:none; width:250px; background:var(--ink); color:#fff;
+  padding:20px 16px; overflow:hidden; transition:width .3s ease, padding .3s ease;
 }
 .leaderboard.collapsed{ width:16px; padding:22px 0; }
 .leaderboard.collapsed .leaderboard-inner{ opacity:0; pointer-events:none; }
 .leaderboard.collapsed .leaderboard-handle svg{ transform:rotate(180deg); }
 
-.leaderboard-inner{ opacity:1; transition:opacity .2s ease; white-space:nowrap; }
+.leaderboard-inner{ opacity:1; transition:opacity .2s ease; white-space:nowrap; display:flex; flex-direction:column; min-height:0; height:100%; }
 
 .score-block-label{
   font-family:'Kanit',sans-serif; font-size:12px; font-weight:600; letter-spacing:.04em;
@@ -330,13 +330,17 @@ textarea:focus{ border-color:var(--green); background:var(--paper); box-shadow:0
 .score-bar-fill{ position:absolute; left:0; top:0; bottom:0; background:#D9534F; border-radius:11px; }
 .score-bar-text{ position:relative; z-index:1; margin-left:10px; font-size:11.5px; font-weight:600; }
 
-.rank-list{ display:flex; flex-direction:column; gap:12px; }
-.rank-row{ display:flex; flex-direction:column; gap:5px; }
+.score-block-title{ font-family:'Kanit',sans-serif; font-size:14px; font-weight:700; color:#fff; margin-bottom:10px; }
+.rank-list{ display:flex; flex-direction:column; gap:8px; overflow-y:auto; overflow-x:hidden; padding-right:4px; flex:1; min-height:0; scrollbar-width:thin; }
+.rank-row{ display:flex; flex-direction:column; gap:4px; padding:4px 0; }
+.rank-info{ display:grid; grid-template-columns:28px minmax(0,1fr) auto; align-items:center; gap:6px; }
 .rank-place{
-  font-family:'Kanit',sans-serif; font-size:12px; font-weight:600; color:rgba(255,255,255,.85);
+  font-family:'Kanit',sans-serif; font-size:12px; font-weight:700; color:rgba(255,255,255,.9);
 }
-.rank-bar{ height:8px; border-radius:6px; background:rgba(255,255,255,.14); overflow:hidden; }
-.rank-bar-fill{ height:100%; border-radius:6px; }
+.rank-name{ font-size:12px; color:rgba(255,255,255,.88); overflow:hidden; text-overflow:ellipsis; }
+.rank-score{ font-family:'Kanit',sans-serif; font-size:11px; font-weight:600; color:rgba(255,255,255,.7); }
+.rank-bar{ height:6px; border-radius:6px; background:rgba(255,255,255,.12); overflow:hidden; }
+.rank-bar-fill{ height:100%; border-radius:6px; background:linear-gradient(90deg,#86C15A,#D8C85A); }
 
 .leaderboard-handle{
   position:absolute; top:50%; right:-14px; transform:translateY(-50%); width:14px; height:52px;
@@ -379,8 +383,86 @@ textarea:focus{ border-color:var(--green); background:var(--paper); box-shadow:0
 .status-dot.green{ background:var(--green); }
 
 @media (max-width:520px){
-  .leaderboard{ width:150px; }
+  .leaderboard{ width:250px; }
   .assignment-note{ display:none; }
+}
+/*course*/
+.chat-shell{ display:flex; flex-direction:column; height:100vh; }
+.chat-screen{ display:none; flex-direction:column; flex:1; min-height:0; }
+.chat-screen.active{ display:flex; }
+ 
+.chat-header{
+  display:flex; align-items:center; gap:12px; padding:14px 18px;
+  background:var(--paper); border-bottom:1px solid var(--line); flex:none;
+}
+.chat-header .avatar{ width:34px; height:34px; font-size:13px; }
+.chat-header-name{ font-family:'Kanit',sans-serif; font-weight:600; font-size:15px; color:var(--ink); }
+ 
+.chat-list{ flex:1; overflow-y:auto; padding:6px 14px; }
+.chat-row{
+  display:flex; align-items:center; gap:14px; padding:12px 8px; border-radius:10px;
+  cursor:pointer; transition:.15s; border-bottom:1px solid var(--line);
+}
+.chat-row:last-child{ border-bottom:none; }
+.chat-row:hover{ background:var(--green-tint); }
+.chat-row .avatar{ width:46px; height:46px; font-size:16px; flex:none; }
+.chat-row-name{ font-family:'Kanit',sans-serif; font-weight:600; font-size:14.5px; color:var(--ink); }
+.chat-row-preview{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+ 
+.chat-thread{
+  flex:1; overflow-y:auto; padding:18px 16px; display:flex; flex-direction:column; gap:10px;
+  background:var(--bg);
+}
+.msg-bubble{ max-width:75%; padding:10px 14px; border-radius:16px; font-size:13.5px; line-height:1.55; }
+.msg-in{ background:var(--paper); color:var(--ink); align-self:flex-start; border-bottom-left-radius:4px; box-shadow:0 6px 14px -10px rgba(30,42,36,.25); }
+.msg-out{ background:var(--green); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+ 
+.chat-input-row{
+  display:flex; align-items:center; gap:10px; padding:12px 14px;
+  background:var(--paper); border-top:1px solid var(--line); flex:none;
+}
+.chat-input-row input{
+  flex:1; padding:11px 16px; border-radius:22px; border:1.5px solid var(--line);
+  background:#FBFAF6; font-family:'Sarabun',sans-serif; font-size:14px; outline:none;
+}
+.chat-input-row input:focus{ border-color:var(--green); box-shadow:0 0 0 3px var(--green-tint); }
+.chat-icon-btn{
+  width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; flex:none;
+}
+.chat-attach{ color:var(--ink-soft); border:1px solid var(--line); background:#FBFAF6; }
+.chat-attach:hover{ background:var(--green-tint); color:var(--green-deep); }
+.chat-send{ background:var(--green); color:#fff; }
+.chat-send:hover{ background:var(--green-deep); }
+.form-group select {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    color: #4f4f4f;
+    outline: none;
+    cursor: pointer;
+    transition: .2s;
+}
+#reportType {
+    margin-top: -5px;
+}
+
+label[for="reportType"] {
+    position: relative;
+    top: -15px;
+}
+
+.form-group select:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, .1);
+}
+
+.form-group select option {
+    font-family: 'Sarabun', sans-serif;
 }
 
 /* Course hamburger menu */
@@ -544,4 +626,22 @@ textarea:focus{ border-color:var(--green); background:var(--paper); box-shadow:0
     min-height: 100vh;
   }
 
+}
+
+
+/* Bug fixes: keep full-screen course UI flush to the viewport on desktop */
+@media (min-width:700px){
+  body.course-page .app-page,
+  body.course-page .app-shell,
+  body.course-page .course-layout{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100vh;
+  }
+}
+
+/* Prevent nested/click-through UI from making the join modal interact with course cards */
+.modal-overlay{
+  z-index:100;
 }

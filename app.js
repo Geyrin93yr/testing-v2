@@ -41,8 +41,8 @@ function logout() {
 }
 
 function requireLogin() {
-  const publicPages = ['index.html', 'signup.html', 'forgot.html'];
-  const page = location.pathname.split('/').pop() || 'index.html';
+  const publicPages = ['', 'index.html', 'signup.html', 'forgot.html'];
+  const page = location.pathname.split('/').pop() || '';
   if (!publicPages.includes(page) && localStorage.getItem(STORAGE.loggedIn) !== 'true') {
     window.location.href = 'index.html';
     return false;
@@ -168,7 +168,7 @@ function setupReport() {
     form.reset();
   });
 }
-
+/*on click*/
 function goToCourse(id) {
   localStorage.setItem('rungtiewCourseId', id);
   window.location.href = 'course.html?c=' + encodeURIComponent(id);
@@ -258,6 +258,41 @@ function setupSettings() {
     showToast(toggle.checked ? 'เปิดการแจ้งเตือนแล้ว' : 'ปิดการแจ้งเตือนแล้ว');
   });
 }
+function openChatRoom(name){
+  const listScreen = document.getElementById('chatListScreen');
+  const roomScreen = document.getElementById('chatRoomScreen');
+  if(!listScreen || !roomScreen) return;
+ 
+  document.getElementById('roomName').textContent = name;
+  document.getElementById('roomAvatar').textContent = name.trim().charAt(0);
+ 
+  listScreen.classList.remove('active');
+  roomScreen.classList.add('active');
+}
+ 
+function closeChatRoom(){
+  const room = document.getElementById('chatRoomScreen');
+  const list = document.getElementById('chatListScreen');
+  if (!room || !list) return;
+  room.classList.remove('active');
+  list.classList.add('active');
+}
+ 
+function sendChatMessage(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+ 
+  const thread = document.getElementById('chatThread');
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble msg-out';
+  bubble.textContent = text;
+  thread.appendChild(bubble);
+  thread.scrollTop = thread.scrollHeight;
+ 
+  input.value = '';
+}
+ 
 
 document.addEventListener('click', e => {
   if (!e.target.closest('.profile-chip') && !e.target.closest('.dropdown')) {
