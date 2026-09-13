@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>งานที่ได้รับมอบหมาย — รังติว</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-page">
+  <div class="app-shell">
+    <div class="app-topbar">
+      <div class="icon-btn" onclick="history.back()">←</div>
+      <div class="profile-chip" onclick="toggleDropdown()">
+        <div class="avatar">G</div>
+        <span class="caret">▾</span>
+      </div>
+    </div>
+
+    <div class="app-body">
+
+      <div class="assignment-hero">
+        <div class="assignment-hero-title-row">
+          <h2 id="assignmentTitle">Assignment 1</h2>
+          <div class="assignment-hero-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v2H8V5a1 1 0 0 1 1-1Z"/><rect x="5" y="4" width="14" height="18" rx="2"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="13" y2="19"/></svg>
+          </div>
+        </div>
+
+        <div class="upload-row">
+          <label class="upload-input" for="assignmentFile">
+            <span id="uploadFileName">อัปโหลดไฟล์</span>
+          </label>
+          <input type="file" id="assignmentFile" style="display:none" onchange="onAssignmentFileChosen(event)">
+          <button class="btn-confirm" onclick="confirmAssignmentUpload()">ยืนยัน</button>
+        </div>
+      </div>
+
+      <div class="result-list" id="resultList">
+        <div class="result-row result-pass">Pass</div>
+        <div class="result-row result-warn">200/400</div>
+        <div class="result-row result-warn">100/400</div>
+        <div class="result-row result-error">Error</div>
+      </div>
+
+    </div>
+
+    <div class="dropdown" id="profileDropdown">
+      <a class="dropdown-item" href="profile.html" style="display:block;color:inherit;">โปรไฟล์ของฉัน</a>
+      <a class="dropdown-item" href="settings.html" style="display:block;color:inherit;">ตั้งค่า</a>
+      <div class="dropdown-item danger" onclick="logout()">ออกจากระบบ</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+<script>
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const name = params.get('name') || 'Assignment 1';
+    document.getElementById('assignmentTitle').textContent = name;
+    document.title = name + ' — รังติว';
+  })();
+
+  function onAssignmentFileChosen(event){
+    const file = event.target.files[0];
+    document.getElementById('uploadFileName').textContent = file ? file.name : 'อัปโหลดไฟล์';
+  }
+
+  function confirmAssignmentUpload(){
+    const fileInput = document.getElementById('assignmentFile');
+    if(!fileInput.files.length){
+      showToast('กรุณาเลือกไฟล์ก่อนยืนยัน');
+      return;
+    }
+    const list = document.getElementById('resultList');
+    const row = document.createElement('div');
+    row.className = 'result-row result-warn';
+    row.textContent = 'รอตรวจ';
+    list.insertBefore(row, list.firstChild);
+
+    fileInput.value = '';
+    document.getElementById('uploadFileName').textContent = 'อัปโหลดไฟล์';
+    showToast('ส่งงานเรียบร้อยแล้ว');
+  }
+</script>
+</body>
+</html>
